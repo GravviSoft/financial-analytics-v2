@@ -1,6 +1,6 @@
-# Real Estate Analytics Platform
+# Financial Analytics Platform
 
-A full-stack real estate analytics platform with a modern React dashboard frontend and Flask backend API.
+A full-stack financial analytics platform with a modern React dashboard frontend and Flask backend API.
 
 ## Quick Start
 
@@ -38,7 +38,7 @@ docker compose down
 ## Architecture
 
 ```
-flask-realestate/
+financial-analytics/
 ├── frontend/               # React application
 │   ├── src/
 │   │   ├── components/    # Reusable UI components
@@ -91,8 +91,8 @@ docker compose ps
 - **Backend**: http://localhost:4001
 
 ### Production (via Traefik)
-- **Frontend**: https://realestate.gravvisoft.com
-- **Backend API**: https://realestate.gravvisoft.com/api
+- **Frontend**: https://financial.gravvisoft.com
+- **Backend API**: https://financial.gravvisoft.com/api
 
 ## Environment Variables
 
@@ -208,7 +208,7 @@ docker compose exec backend bash
 
 ## License
 
-This project is part of the Flask Real Estate application.
+This project is part of the Financial Analytics application.
 
 ## Contributing
 

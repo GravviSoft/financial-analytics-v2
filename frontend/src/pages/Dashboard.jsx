@@ -53,7 +53,7 @@ const Dashboard = () => {
       <div className="dashboard-shell">
         <header className="dashboard-header">
           <div className="dashboard-heading">
-            <p className="eyebrow">Real Estate Intelligence</p>
+            <p className="eyebrow">Financial Intelligence</p>
             <h1>Analytics Dashboard</h1>
             <p className="subtitle">Track portfolio performance, revenue, and listings in one place.</p>
           </div>

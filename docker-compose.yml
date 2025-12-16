@@ -1,76 +1,3 @@
-# networks:
-#   proxy-net:
-#     external: true
-#   # app-net:
-#   #   driver: bridge
-
-# services:
-#   frontend:
-#     build:
-#       context: ./frontend
-#       dockerfile: Dockerfile
-#     ports:
-#       - "3001:80"
-#     expose:
-#       - "80"
-#     networks:
-#       - proxy-net
-#       - app-net
-#     environment:
-#       - NODE_ENV=production
-#     restart: unless-stopped
-#     healthcheck:
-#       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80/"]
-#       interval: 30s
-#       timeout: 3s
-#       start_period: 5s
-#       retries: 3
-#     labels:
-#       - "traefik.enable=true"
-#       - "traefik.http.routers.flask-app-frontend.rule=Host(`realestate.gravvisoft.com`)"
-#       - "traefik.http.routers.flask-app-frontend.entrypoints=websecure"
-#       - "traefik.http.routers.flask-app-frontend.tls.certresolver=letsencrypt"
-#       - "traefik.http.routers.flask-app-frontend.service=flask-app-frontend-svc"
-#       - "traefik.http.services.flask-app-frontend-svc.loadbalancer.server.port=80"
-#       - "traefik.http.routers.flask-app-frontend-web.rule=Host(`realestate.gravvisoft.com`)"
-#       - "traefik.http.routers.flask-app-frontend-web.entrypoints=web"
-#       - "traefik.http.routers.flask-app-frontend-web.middlewares=redirect-to-https"
-#       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
-
-#   backend:
-#     build:
-#       context: ./backend
-#       dockerfile: Dockerfile
-#     env_file:
-#       - ./backend/.env
-#     ports:
-#       - "4001:7000"
-#     expose:
-#       - "7000"
-#     networks:
-#       - proxy-net
-#       - app-net
-#     volumes:
-#       - ./backend:/app
-#     environment:
-#       - FLASK_ENV=development
-#       - FLASK_DEBUG=1
-#     restart: unless-stopped
-#     labels:
-#       - "traefik.enable=true"
-#       - "traefik.http.routers.flask-app-backend.rule=Host(`realestate.gravvisoft.com`) && PathPrefix(`/api`)"
-#       - "traefik.http.routers.flask-app-backend.entrypoints=websecure"
-#       - "traefik.http.routers.flask-app-backend.tls.certresolver=letsencrypt"
-#       - "traefik.http.routers.flask-app-backend.service=flask-app-backend-svc"
-#       - "traefik.http.services.flask-app-backend-svc.loadbalancer.server.port=7000"
-#       - "traefik.http.routers.flask-app-backend-web.rule=Host(`realestate.gravvisoft.com`) && PathPrefix(`/api`)"
-#       - "traefik.http.routers.flask-app-backend-web.entrypoints=web"
-#       - "traefik.http.routers.flask-app-backend-web.middlewares=redirect-to-https,flask-app-api-strip"
-#       - "traefik.http.routers.flask-app-backend.middlewares=flask-app-api-strip"
-#       - "traefik.http.middlewares.flask-app-api-strip.stripprefix.prefixes=/api"
-
-
-
 networks:
   proxy-net:
     external: true
@@ -90,14 +17,14 @@ services:
       retries: 3
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.flask-app-frontend.rule=Host(`realestate.gravvisoft.com`)"
-      - "traefik.http.routers.flask-app-frontend.entrypoints=websecure"
-      - "traefik.http.routers.flask-app-frontend.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.flask-app-frontend.service=flask-app-frontend-svc"
-      - "traefik.http.services.flask-app-frontend-svc.loadbalancer.server.port=80"
-      - "traefik.http.routers.flask-app-frontend-web.rule=Host(`realestate.gravvisoft.com`)"
-      - "traefik.http.routers.flask-app-frontend-web.entrypoints=web"
-      - "traefik.http.routers.flask-app-frontend-web.middlewares=redirect-to-https"
+      - "traefik.http.routers.financial-frontend.rule=Host(`financial.gravvisoft.com`)"
+      - "traefik.http.routers.financial-frontend.entrypoints=websecure"
+      - "traefik.http.routers.financial-frontend.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.financial-frontend.service=financial-frontend-svc"
+      - "traefik.http.services.financial-frontend-svc.loadbalancer.server.port=80"
+      - "traefik.http.routers.financial-frontend-web.rule=Host(`financial.gravvisoft.com`)"
+      - "traefik.http.routers.financial-frontend-web.entrypoints=web"
+      - "traefik.http.routers.financial-frontend-web.middlewares=redirect-to-https"
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
 
   backend:
@@ -105,17 +32,17 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     env_file: [./backend/.env]
-    expose: ["7000"]
+    expose: ["7003"]
     networks: [proxy-net]
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.flask-app-backend.rule=Host(`realestate.gravvisoft.com`) && PathPrefix(`/api`)"
-      - "traefik.http.routers.flask-app-backend.entrypoints=websecure"
-      - "traefik.http.routers.flask-app-backend.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.flask-app-backend.service=flask-app-backend-svc"
-      - "traefik.http.services.flask-app-backend-svc.loadbalancer.server.port=7000"
-      - "traefik.http.routers.flask-app-backend-web.rule=Host(`realestate.gravvisoft.com`) && PathPrefix(`/api`)"
-      - "traefik.http.routers.flask-app-backend-web.entrypoints=web"
-      - "traefik.http.routers.flask-app-backend-web.middlewares=redirect-to-https,flask-app-api-strip"
-      - "traefik.http.routers.flask-app-backend.middlewares=flask-app-api-strip"
-      - "traefik.http.middlewares.flask-app-api-strip.stripprefix.prefixes=/api"
+      - "traefik.http.routers.financial-backend.rule=Host(`financial.gravvisoft.com`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.financial-backend.entrypoints=websecure"
+      - "traefik.http.routers.financial-backend.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.financial-backend.service=financial-backend-svc"
+      - "traefik.http.services.financial-backend-svc.loadbalancer.server.port=7003"
+      - "traefik.http.routers.financial-backend-web.rule=Host(`financial.gravvisoft.com`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.financial-backend-web.entrypoints=web"
+      - "traefik.http.routers.financial-backend-web.middlewares=redirect-to-https,financial-api-strip"
+      - "traefik.http.routers.financial-backend.middlewares=financial-api-strip"
+      - "traefik.http.middlewares.financial-api-strip.stripprefix.prefixes=/api"
