@@ -14,6 +14,7 @@ services:
     expose:
       - "80"
     networks:
+      - proxy-net
       - app-net
     environment:
       - NODE_ENV=production
@@ -47,6 +48,7 @@ services:
     expose:
       - "7000"
     networks:
+      - proxy-net
       - app-net
     volumes:
       - ./backend:/app
