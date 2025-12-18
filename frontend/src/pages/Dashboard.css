@@ -56,6 +56,8 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 40px 28px 56px;
+  transform: scale(0.9);
+  transform-origin: top center;
 }
 
 .dashboard-header {
