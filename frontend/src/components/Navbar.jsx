@@ -1,31 +1,30 @@
 import { useLocation } from 'react-router-dom';
 import { Menubar } from 'primereact/menubar';
-import { Avatar } from 'primereact/avatar';
-import { Badge } from 'primereact/badge';
+import { FaMoon, FaSun } from 'react-icons/fa';
 import './Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ darkMode, onToggleMode }) => {
   const location = useLocation();
 
   const items = [
-    {
-      label: 'Dashboard',
-      icon: 'pi pi-home',
-      command: () => (window.location.href = '/'),
-      className: location.pathname === '/' ? 'active-menu-item' : '',
-    },
-    {
-      label: 'Analytics',
-      icon: 'pi pi-chart-line',
-      command: () => (window.location.href = '/analytics'),
-      className: location.pathname === '/analytics' ? 'active-menu-item' : '',
-    },
-    {
-      label: 'Reports',
-      icon: 'pi pi-file',
-      command: () => (window.location.href = '/reports'),
-      className: location.pathname === '/reports' ? 'active-menu-item' : '',
-    },
+    // {
+    //   label: 'Dashboard',
+    //   icon: 'pi pi-home',
+    //   command: () => (window.location.href = '/'),
+    //   className: location.pathname === '/' ? 'active-menu-item' : '',
+    // },
+    // {
+    //   label: 'Analytics',
+    //   icon: 'pi pi-chart-line',
+    //   command: () => (window.location.href = '/analytics'),
+    //   className: location.pathname === '/analytics' ? 'active-menu-item' : '',
+    // },
+    // {
+    //   label: 'Reports',
+    //   icon: 'pi pi-file',
+    //   command: () => (window.location.href = '/reports'),
+    //   className: location.pathname === '/reports' ? 'active-menu-item' : '',
+    // },
   ];
 
   const start = (
@@ -37,20 +36,20 @@ const Navbar = () => {
 
   const end = (
     <div className="navbar-end">
-      <i className="pi pi-bell p-overlay-badge" style={{ fontSize: '1.25rem', cursor: 'pointer' }}>
-        <Badge value="3" severity="danger"></Badge>
-      </i>
-      <Avatar
-        icon="pi pi-user"
-        size="normal"
-        shape="circle"
-        style={{ backgroundColor: '#3B82F6', color: '#ffffff', marginLeft: '1rem', cursor: 'pointer' }}
-      />
+      <button
+        className="navbar-mode-button"
+        type="button"
+        onClick={onToggleMode}
+        aria-label="Toggle light and dark mode"
+      >
+        {darkMode ? <FaSun /> : <FaMoon />}
+        {darkMode ? 'Light Mode' : 'Dark Mode'}
+      </button>
     </div>
   );
 
   return (
-    <div className="navbar-container">
+    <div className={`navbar-container ${darkMode ? 'navbar-container--dark' : ''}`}>
       <Menubar model={items} start={start} end={end} className="custom-menubar" />
     </div>
   );

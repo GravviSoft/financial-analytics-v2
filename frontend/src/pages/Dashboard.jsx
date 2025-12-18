@@ -1,12 +1,34 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { FaGithub } from 'react-icons/fa';
 import DataTable from '../components/DataTable';
 import dataService from '../services/dataService';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { Card } from 'primereact/card';
 import { Bar, Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 import './Dashboard.css';
 
-const Dashboard = () => {
+const Dashboard = ({ darkMode = false }) => {
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+  );
   const [loading, setLoading] = useState(true);
   const [dashboardData, setDashboardData] = useState(null);
   const [spData, setSpData] = useState(null);
@@ -67,15 +89,6 @@ const Dashboard = () => {
       setSpivaLoading(false);
     }
   };
-
-  const transactionColumns = [
-    { field: 'property', header: 'Property', sortable: true },
-    { field: 'type', header: 'Type', sortable: true },
-    { field: 'price', header: 'Price', sortable: true },
-    { field: 'date', header: 'Date', sortable: true },
-    { field: 'status', header: 'Status', sortable: true },
-    { field: 'agent', header: 'Agent', sortable: true },
-  ];
 
   const spYears = useMemo(() => {
     if (!spData) return [];
@@ -164,7 +177,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="dashboard">
+    <div className={`dashboard ${darkMode ? 'dashboard--dark' : ''}`}>
       <div className="dashboard-shell">
         <header className="dashboard-header">
           <div className="dashboard-heading">
@@ -179,6 +192,7 @@ const Dashboard = () => {
               target="_blank"
               rel="noreferrer"
             >
+              <FaGithub />
               View on GitHub
             </a>
           </div>
