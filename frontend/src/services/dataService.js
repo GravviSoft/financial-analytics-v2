@@ -2,6 +2,21 @@ import axios from 'axios';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
+const resolveSpApiBase = () => {
+  if (process.env.REACT_APP_SP_API_URL) return process.env.REACT_APP_SP_API_URL;
+
+  // When running locally outside Docker
+  if (typeof window !== 'undefined') {
+    const host = window.location.hostname;
+    if (host === 'localhost' || host === '127.0.0.1') {
+      return 'http://localhost:4003/api';
+    }
+  }
+
+  // Default for docker-compose where backend service is named `backend`
+  return 'http://backend:7003/api';
+};
+
 // Mock data generator for demo purposes
 export const generateMockData = () => {
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -141,6 +156,58 @@ const dataService = {
       return response.data;
     } catch (error) {
       return generateMockData().topAgents;
+    }
+  },
+
+  async getSpComparisonData() {
+    try {
+      const response = await axios.get(`${resolveSpApiBase()}/chart-data`);
+      return response.data;
+    } catch (error) {
+      // Fallback to the CSV values if backend isn't reachable
+      return {
+        categories: ['S&P 500®', 'All Large-Cap'],
+        years: {
+          '1 YR': [72.61, 27.39],
+          '3 YR': [64.87, 35.13],
+          '5 YR': [86.91, 13.09],
+          '10 YR': [85.98, 14.02],
+          '15 YR': [88.29, 11.71],
+        },
+      };
+    }
+  },
+
+  async getSpivaTableData() {
+    try {
+      const response = await axios.get(`${resolveSpApiBase()}/spiva-table`);
+      return response.data;
+    } catch (error) {
+      // Small fallback subset mirroring the CSV structure
+      return [
+        {
+          id: 1,
+          'Asset Class': 'U.S. Equity',
+          'Fund Category': 'All Large-Cap',
+          'Comparison Index': 'S&P 500®',
+          '1 YR (%)': 72.61,
+          '3 YR (%)': 64.87,
+          '5 YR (%)': 86.91,
+          '10 YR (%)': 85.98,
+          '15 YR (%)': 88.29,
+        },
+        {
+          id: 2,
+          'Asset Class': 'U.S. Equity',
+          'Fund Category': 'All Domestic',
+          'Comparison Index': 'S&P Composite 1500®',
+          '1 YR (%)': 74.87,
+          '3 YR (%)': 79.32,
+          '5 YR (%)': 88.32,
+          '10 YR (%)': 90.31,
+          '15 YR (%)': 92.52,
+        },
+      ];
     }
   },
 };

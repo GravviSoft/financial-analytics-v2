@@ -1,2 +1,7 @@
 Flask==2.3.3
 gunicorn==21.2.0
+matplotlib==3.9.3
+bokeh==3.6.2
+pandas==2.2.3
+python-dotenv
+Flask-Cors==4.0.1

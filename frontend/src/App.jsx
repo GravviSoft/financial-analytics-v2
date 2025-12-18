@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Dashboard from './pages/Dashboard';
+import Chart from './pages/Chart';
 import 'primereact/resources/themes/lara-light-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/analytics" element={<Dashboard />} />
             <Route path="/reports" element={<Dashboard />} />
+            <Route path="/chart" element={<Chart />} />
           </Routes>
         </div>
       </div>

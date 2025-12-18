@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { DataTable as PrimeDataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Card } from 'primereact/card';
 import { InputText } from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
+import { Button } from 'primereact/button';
 import './DataTable.css';
 
-const DataTable = ({ title, data, columns }) => {
+const DataTable = ({ title, data, columns, downloadName }) => {
   const [globalFilter, setGlobalFilter] = useState('');
+  const tableRef = useRef(null);
 
   const statusBodyTemplate = (rowData) => {
     const getSeverity = (status) => {
@@ -29,21 +31,36 @@ const DataTable = ({ title, data, columns }) => {
   const header = (
     <div className="table-header">
       <h3>{title}</h3>
-      <span className="p-input-icon-left">
-        <i className="pi pi-search" />
-        <InputText
-          type="search"
-          value={globalFilter}
-          onChange={(e) => setGlobalFilter(e.target.value)}
-          placeholder="Search..."
+      <div className="table-header__actions">
+        <span className="p-input-icon-left">
+          <i className="pi pi-search" />
+          <InputText
+            type="search"
+            value={globalFilter}
+            onChange={(e) => setGlobalFilter(e.target.value)}
+            placeholder="Search..."
+          />
+        </span>
+        <Button
+          type="button"
+          label="Download CSV"
+          icon="pi pi-download"
+          className="p-button-outlined p-button-sm"
+          onClick={() =>
+            tableRef.current?.exportCSV({
+              selectionOnly: false,
+              fileName: downloadName || title || 'table-export',
+            })
+          }
         />
-      </span>
+      </div>
     </div>
   );
 
   return (
     <Card className="datatable-card">
       <PrimeDataTable
+        ref={tableRef}
         value={data}
         paginator
         rows={10}
