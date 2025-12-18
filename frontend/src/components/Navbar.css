@@ -35,7 +35,7 @@
 .navbar-brand {
   display: flex;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 1.65rem;
   font-weight: 700;
   color: #111827;
   gap: 0.75rem;
@@ -71,11 +71,12 @@
   align-items: center;
   gap: 0.6rem;
   border-radius: 999px;
-  padding: 0.55rem 1.15rem;
+  padding: 0.6rem 1.25rem;
   border: 1px solid #e5e7eb;
   background: #f8fafc;
   color: #0f172a;
   font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 8px 16px rgba(15, 23, 42, 0.08);
@@ -111,6 +112,7 @@
   border-radius: 8px;
   padding: 0.75rem 1.25rem;
   font-weight: 500;
+  font-size: 1rem;
   transition: all 0.2s;
 }
 

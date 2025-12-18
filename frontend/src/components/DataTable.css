@@ -23,13 +23,13 @@
 
 .table-header h3 {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #0f172a;
 }
 
 .custom-datatable {
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 
 .custom-datatable .p-datatable-header {
