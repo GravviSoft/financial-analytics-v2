@@ -269,7 +269,8 @@ const Dashboard = ({ darkMode = false }) => {
               {spSummary ? `${spSummary.maxValue.toFixed(1)}%` : '--'}
             </div>
             <div className="hero-kpi__caption hero-kpi__caption--callout">
-              S&P 500 WINS 
+          
+              S&P 500 BEATS MOST FUND MANAGERS
             </div>
               <div className="hero-kpi__caption">
               ({spYear}).
@@ -340,8 +341,7 @@ const Dashboard = ({ darkMode = false }) => {
               data={spivaData}
               columns={spivaColumns}
               downloadName="spiva-benchmark"
-              rows={25}
-              rowsPerPageOptions={[25, 50, 100, 250]}
+              paginator={false}
             />
           )}
         </section>
