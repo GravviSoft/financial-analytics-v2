@@ -20,7 +20,7 @@ def example():
 @app.route("/api/chart-data")
 def chart_data():
     """JSON API endpoint that returns chart data"""
-    csv_path = os.path.join(os.path.dirname(__file__), "S&P Comparison.csv")
+    csv_path = os.path.join(os.path.dirname(__file__), "sp500-benchmark-underperformance.csv")
     df = pd.read_csv(csv_path)
 
     # Prepare data for all years
@@ -42,7 +42,7 @@ def chart_data():
 @app.route("/api/spiva-table")
 def spiva_table():
     """JSON API endpoint that returns SPIVA table data"""
-    csv_path = os.path.join(os.path.dirname(__file__), "S&P 500 DATA - SPIVA (1).csv")
+    csv_path = os.path.join(os.path.dirname(__file__), "spiva-underperformance-by-category.csv")
     df = pd.read_csv(csv_path)
 
     records = df.to_dict(orient="records")
