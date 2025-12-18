@@ -7,7 +7,7 @@ import { Tag } from 'primereact/tag';
 import { Button } from 'primereact/button';
 import './DataTable.css';
 
-const DataTable = ({ title, data, columns, downloadName }) => {
+const DataTable = ({ title, data, columns, downloadName, rows = 10, rowsPerPageOptions = [10, 25, 50, 100] }) => {
   const [globalFilter, setGlobalFilter] = useState('');
   const tableRef = useRef(null);
 
@@ -63,7 +63,8 @@ const DataTable = ({ title, data, columns, downloadName }) => {
         ref={tableRef}
         value={data}
         paginator
-        rows={10}
+        rows={rows}
+        rowsPerPageOptions={rowsPerPageOptions}
         dataKey="id"
         globalFilter={globalFilter}
         header={header}

@@ -223,7 +223,7 @@ const Dashboard = ({ darkMode = false }) => {
 
         {/* <div className="info-banner">
           <div className="info-banner__title">United States</div>
-          <div className="info-banner__subtitle">Percentage of funds that underperformed their benchmark</div>
+          <div className="info-banner__subtitle">Why would an investor with this information pay a fund manager to manage their money?  Skip the fees and put your money in the S&P 500 or buy real estate.</div>
           <div className="info-banner__meta">As of: Jun 30, 2025</div>
         </div> */}
 
@@ -275,6 +275,15 @@ const Dashboard = ({ darkMode = false }) => {
               ({spYear}).
             </div>
           </div>
+        </section>
+
+        <section className="panel-grid">
+          <Card className="chart-card info-card" title="Why this matters">
+            <p>
+              This helps investors understand the odds before paying higher fees for active management.
+              If most funds underperform, low-cost index funds can be a smarter default.
+            </p>
+          </Card>
         </section>
 
         {/* S&P Line Trend */}
@@ -331,6 +340,8 @@ const Dashboard = ({ darkMode = false }) => {
               data={spivaData}
               columns={spivaColumns}
               downloadName="spiva-benchmark"
+              rows={25}
+              rowsPerPageOptions={[25, 50, 100, 250]}
             />
           )}
         </section>
