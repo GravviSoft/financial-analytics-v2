@@ -32,9 +32,8 @@ docker-compose -f docker-compose.dev.yml down
 
 ## Environment variables
 Frontend (`frontend/.env`):
-```bash
-REACT_APP_SP_API_URL=https://finance.gravvisoft.com/api   # local dev falls back to http://localhost:4003/api
-```
+- No local `.env` needed. Local dev auto-uses `http://localhost:4003/api`.
+- In production, set `REACT_APP_SP_API_URL` in the deployment environment if you need to override the default (`<window.location.origin>/api`).
 
 Backend (`backend/.env`):
 ```bash
