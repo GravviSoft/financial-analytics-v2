@@ -2,7 +2,7 @@
 
 A focused dashboard that answers one question: **How often do active funds fail to beat their index benchmarks?**
 
-It pairs a React + PrimeReact frontend with a Flask API that serves SPIVA-style data from CSV files.
+It pairs a React + PrimeReact frontend with a Flask API that serves SPIVA-style data from either bundled CSVs or Postgres (toggleable)
 
 ## What this shows
 - **Bar chart** with year toggles: share of active funds that underperform benchmarks.
