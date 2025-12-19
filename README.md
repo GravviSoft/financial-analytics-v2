@@ -36,8 +36,7 @@ Frontend (`frontend/.env`):
 Backend (`backend/.env`):
 USE_DB=0                      # 0 = CSV (default), 1 = Postgres
 CONNECTION_STRING=postgresql://user:password@host:port/dbname  # used only when USE_DB=1
-# DB_SCHEMA=kaggle             # optional schema qualifier if tables aren’t in public
-# PORT=7000                    # only if running python app.py directly
+
 
 ### Data storage modes
 - CSV mode (default): USE_DB=0; reads from the two CSVs in backend/.
