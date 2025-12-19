@@ -14,7 +14,7 @@ The backend reads CSVs located in `backend/`:
 - `sp500-benchmark-underperformance.csv`
 - `spiva-underperformance-by-category.csv`
 
-## Quick Start (Docker Dev - Recommended)
+## Run with Docker (Dev)
 ```bash
 # from repo root
 docker-compose -f docker-compose.dev.yml up --build
@@ -29,33 +29,10 @@ Stop:
 docker-compose -f docker-compose.dev.yml down
 ```
 
-## Local Dev (no Docker, optional)
-### Backend
-```bash
-cd backend
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python app.py
-```
-Backend runs on http://localhost:7000 by default.
-
-### Frontend
-```bash
-cd frontend
-npm install
-npm start
-```
-Frontend runs on http://localhost:3000 by default.
-
 ## Environment variables
-Create `frontend/.env` if needed:
+Create `frontend/.env` (only production URL is needed; local dev uses `localhost:4003` automatically):
 ```bash
-# Main API (dashboard mock endpoints, optional)
-REACT_APP_API_URL=http://localhost:5000/api
-
-# SPIVA/S&P data API
-REACT_APP_SP_API_URL=http://localhost:4003/api
+REACT_APP_SP_API_URL=https://finance.gravvisoft.com/api
 ```
 
 Create `backend/.env` for Flask settings if needed.
@@ -86,5 +63,5 @@ If you don’t use Traefik, stick to the dev compose file.
 1. Fork the repo
 2. Create a branch
 3. Make changes
-4. Run locally with Docker or npm/flask
+4. Run locally with Docker
 5. Open a PR
