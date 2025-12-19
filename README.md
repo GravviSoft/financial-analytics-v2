@@ -47,14 +47,17 @@ CONNECTION_STRING=postgresql://user:password@host:port/dbname
 # Optional: override port if running python app.py directly (Docker sets this via command)
 # PORT=7000
 ```
-Notes:
-- CSV is the default source; set `USE_DB=1` to query Postgres instead.
-- Postgres mode expects tables mirroring the CSVs:
-  - `sp500_benchmark_underperformance` with columns `"Comparison Index","1 YR (%)","3 YR (%)","5 YR (%)","10 YR (%)","15 YR (%)"`
-  - `spiva_underperformance_by_category` with columns `"Asset Class","Fund Category","Comparison Index","1 YR (%)","3 YR (%)","5 YR (%)","10 YR (%)","15 YR (%)"`
+```
+
+### Data storage modes
+- **CSV mode (default)**: `USE_DB=0`. The API reads straight from the two CSV files in `backend/`. No database required.
+- **Postgres mode (optional)**: `USE_DB=1`. The API reads from Postgres using `CONNECTION_STRING`. Use this if you’ve loaded the CSV data into a database.
+
+Postgres mode expects two tables that mirror the CSV headers exactly:
+- `sp500_benchmark_underperformance` with columns `"Comparison Index","1 YR (%)","3 YR (%)","5 YR (%)","10 YR (%)","15 YR (%)"`
+- `spiva_underperformance_by_category` with columns `"Asset Class","Fund Category","Comparison Index","1 YR (%)","3 YR (%)","5 YR (%)","10 YR (%)","15 YR (%)"`
 
 ## API endpoints
-- `GET /health`
 - `GET /api/chart-data` (from `sp500-benchmark-underperformance.csv`)
 - `GET /api/spiva-table` (from `spiva-underperformance-by-category.csv`)
 
