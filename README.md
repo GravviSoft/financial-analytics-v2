@@ -1,7 +1,7 @@
-# Financial Analytics Dashboard (Active vs Passive)
+# Financial Analytics Dashboard — Do Professional Fund Managers Beat the Market?
 
-A full-stack dashboard that answers one question quickly:
-## Do Professional Fund Managers Beat the Market?
+A focused dashboard that answers one question: **How often do active funds fail to beat their index benchmarks?**
+
 It pairs a React + PrimeReact frontend with a Flask API that serves SPIVA-style data from CSV files.
 
 ## What this shows
