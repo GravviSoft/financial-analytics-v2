@@ -31,12 +31,27 @@ docker-compose -f docker-compose.dev.yml down
 ```
 
 ## Environment variables
-Create `frontend/.env` (only production URL is needed; local dev uses `localhost:4003` automatically):
+Frontend (`frontend/.env`):
 ```bash
-REACT_APP_SP_API_URL=https://finance.gravvisoft.com/api
+REACT_APP_SP_API_URL=https://finance.gravvisoft.com/api   # local dev falls back to http://localhost:4003/api
 ```
 
-Create `backend/.env` for Flask settings if needed.
+Backend (`backend/.env`):
+```bash
+# Toggle database usage: 0 = read CSV files (default), 1 = read from Postgres
+USE_DB=0
+
+# Postgres connection string, used only when USE_DB=1
+CONNECTION_STRING=postgresql://user:password@host:port/dbname
+
+# Optional: override port if running python app.py directly (Docker sets this via command)
+# PORT=7000
+```
+Notes:
+- CSV is the default source; set `USE_DB=1` to query Postgres instead.
+- Postgres mode expects tables mirroring the CSVs:
+  - `sp500_benchmark_underperformance` with columns `"Comparison Index","1 YR (%)","3 YR (%)","5 YR (%)","10 YR (%)","15 YR (%)"`
+  - `spiva_underperformance_by_category` with columns `"Asset Class","Fund Category","Comparison Index","1 YR (%)","3 YR (%)","5 YR (%)","10 YR (%)","15 YR (%)"`
 
 ## API endpoints
 - `GET /health`

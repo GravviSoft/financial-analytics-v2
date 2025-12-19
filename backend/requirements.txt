@@ -5,3 +5,5 @@ bokeh==3.6.2
 pandas==2.2.3
 python-dotenv
 Flask-Cors==4.0.1
+SQLAlchemy==2.0.25
+psycopg2-binary==2.9.9
