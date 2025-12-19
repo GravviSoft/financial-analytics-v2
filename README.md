@@ -21,61 +21,48 @@ The backend reads CSVs located in `backend/`:
 docker-compose -f docker-compose.dev.yml up --build
 ```
 
-Local URLs:
+## Local URLs
 - Frontend: http://localhost:3003
 - Backend API: http://localhost:4003
 
-Stop:
-```bash
+Stop dev stack:
 docker-compose -f docker-compose.dev.yml down
-```
 
-## Environment variables
+## Environment
 Frontend (`frontend/.env`):
-- No local `.env` needed. Local dev auto-uses `http://localhost:4003/api`.
-- In production, set `REACT_APP_SP_API_URL` in the deployment environment if you need to override the default (`<window.location.origin>/api`).
+- None needed for local dev; it auto-targets http://localhost:4003/api.
+- For production, set REACT_APP_SP_API_URL in your deploy env if you need to override the default (<window.location.origin>/api).
 
 Backend (`backend/.env`):
-```bash
-# Toggle database usage: 0 = read CSV files (default), 1 = read from Postgres
-USE_DB=0
-
-# Postgres connection string, used only when USE_DB=1
-CONNECTION_STRING=postgresql://user:password@host:port/dbname
-
-# Optional: override port if running python app.py directly (Docker sets this via command)
-# PORT=7000
-```
-```
+USE_DB=0                      # 0 = CSV (default), 1 = Postgres
+CONNECTION_STRING=postgresql://user:password@host:port/dbname  # used only when USE_DB=1
+# DB_SCHEMA=kaggle             # optional schema qualifier if tables aren’t in public
+# PORT=7000                    # only if running python app.py directly
 
 ### Data storage modes
-- **CSV mode (default)**: `USE_DB=0`. The API reads straight from the two CSV files in `backend/`. No database required.
-- **Postgres mode (optional)**: `USE_DB=1`. The API reads from Postgres using `CONNECTION_STRING`. Use this if you’ve loaded the CSV data into a database.
-
-Postgres mode expects two tables that mirror the CSV headers exactly:
-- `sp500_benchmark_underperformance` with columns `"Comparison Index","1 YR (%)","3 YR (%)","5 YR (%)","10 YR (%)","15 YR (%)"`
-- `spiva_underperformance_by_category` with columns `"Asset Class","Fund Category","Comparison Index","1 YR (%)","3 YR (%)","5 YR (%)","10 YR (%)","15 YR (%)"`
+- CSV mode (default): USE_DB=0; reads from the two CSVs in backend/.
+- Postgres mode (optional): USE_DB=1; reads from Postgres using CONNECTION_STRING (and DB_SCHEMA if needed).
+  - Tables must mirror the CSV headers:
+    - sp500_benchmark_underperformance: "Comparison Index","1 YR (%)","3 YR (%)","5 YR (%)","10 YR (%)","15 YR (%)"
+    - spiva_underperformance_by_category: "Asset Class","Fund Category","Comparison Index","1 YR (%)","3 YR (%)","5 YR (%)","10 YR (%)","15 YR (%)"
 
 ## API endpoints
-- `GET /api/chart-data` (from `sp500-benchmark-underperformance.csv`)
-- `GET /api/spiva-table` (from `spiva-underperformance-by-category.csv`)
+- GET /api/chart-data
+- GET /api/spiva-table
 
 ## Production (Traefik)
-`docker-compose.yml` is configured for Traefik and `financial.gravvisoft.com`.
-If you don’t use Traefik, stick to the dev compose file.
+`docker-compose.yml` is set up for finance.gravvisoft.com with Traefik. If you’re not using Traefik, stick to the dev compose file.
+
+## Tech stack & dependencies
+- Frontend: React, PrimeReact, Chart.js, React Router, axios
+- Backend: Flask, Pandas, SQLAlchemy, psycopg2-binary, Flask-CORS
+- Data: CSVs in `backend/` or Postgres (see Data storage modes)
+- Infra/Dev: Docker, Docker Compose, react-scripts (dev server), gunicorn (prod)
 
 ## Troubleshooting
-- **Missing Python deps in Docker**: rebuild the backend image:
-  ```bash
-  docker-compose -f docker-compose.dev.yml build --no-cache backend
-  ```
-- **CORS errors**: backend uses Flask-CORS, so rebuild after dependency changes.
-- **Chart.js scale errors**: ensure frontend is rebuilt after dependency or code changes.
-
-## Tech Stack
-- Frontend: React, PrimeReact, Chart.js, React Router
-- Backend: Flask, Pandas
-- Infra: Docker, Docker Compose
+- Rebuild backend deps: docker-compose -f docker-compose.dev.yml build --no-cache backend
+- CORS errors: rebuild backend after dependency changes.
+- Chart issues: rebuild frontend (npm start / npm run build).
 
 ## Contributing
 1. Fork the repo
