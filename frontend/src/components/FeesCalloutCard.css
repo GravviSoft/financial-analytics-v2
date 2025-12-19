@@ -1,0 +1,133 @@
+.fees-card {
+  height: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  border-radius: 16px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fees-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.fees-card__title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.fees-card__chip {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0b1220;
+  background: rgba(52, 211, 153, 0.2);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  border-radius: 999px;
+  padding: 6px 10px;
+  white-space: nowrap;
+}
+
+.fees-card__rows {
+  position: relative;
+  flex: 1;
+  min-height: 220px;
+}
+
+.fees-card__row {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px 12px;
+  align-items: start;
+}
+
+.fees-card__bullet {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 4px;
+}
+
+.fees-card__bullet--blue {
+  background: #60a5fa;
+}
+
+.fees-card__bullet--green {
+  background: #34d399;
+}
+
+.fees-card__copy {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 4px;
+  column-gap: 8px;
+}
+
+.fees-card__label {
+  grid-column: 1 / -1;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+.fees-card__value {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.fees-card__note {
+  grid-column: 1 / -1;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.fees-card__footer {
+  margin-top: auto;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.fees-card__row--blue {
+  top: var(--fees-blue-offset, 8%);
+}
+
+.fees-card__row--green {
+  top: var(--fees-green-offset, 60%);
+}
+
+@media (max-width: 1024px) {
+  .fees-card {
+    height: auto;
+  }
+  .fees-card__header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .fees-card__copy {
+    grid-template-columns: 1fr;
+  }
+  .fees-card__rows {
+    position: relative;
+    min-height: auto;
+    padding-top: 12px;
+  }
+  .fees-card__row {
+    position: relative;
+    top: 0;
+    margin-bottom: 16px;
+  }
+}

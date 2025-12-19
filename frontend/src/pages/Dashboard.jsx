@@ -5,6 +5,7 @@ import dataService from '../services/dataService';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { Card } from 'primereact/card';
 import { Bar, Line } from 'react-chartjs-2';
+import FeesCalloutCard from '../components/FeesCalloutCard';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -136,11 +137,12 @@ const Dashboard = ({ darkMode = false }) => {
   const spLineData = useMemo(() => {
     if (!spData) return null;
     const palette = ['rgba(54, 162, 235, 1)', 'rgba(34, 197, 94, 1)'];
+    const legendLabels = ['Index benchmark (S&P 500)', 'Active fund benchmark (Large-Cap)'];
 
     return {
       labels: spYears,
       datasets: spData.categories.map((cat, idx) => ({
-        label: cat,
+        label: legendLabels[idx] || cat,
         data: spYears.map((year) => spData.years[year]?.[idx]),
         borderColor: palette[idx % palette.length],
         backgroundColor: palette[idx % palette.length],
@@ -184,6 +186,19 @@ const Dashboard = ({ darkMode = false }) => {
     { field: 'yr10', header: '10 YR (%)', sortable: true },
     { field: 'yr15', header: '15 YR (%)', sortable: true },
   ];
+
+  const spivaHighlight = useMemo(() => {
+    if (!spivaData || !spivaData.length) return null;
+    const target =
+      spivaData.find((row) => row.fundCategory?.toLowerCase().includes('all large-cap')) || spivaData[0];
+    const fiveYr = Number.parseFloat(target?.yr5);
+    return {
+      asOf: 'Jun 30, 2025',
+      fiveYr: Number.isFinite(fiveYr) ? fiveYr : null,
+      comparisonIndex: target?.comparisonIndex || 'S&P 500®',
+      fundCategory: target?.fundCategory || 'All Large-Cap',
+    };
+  }, [spivaData]);
 
   if (loading) {
     return (
@@ -287,9 +302,9 @@ const Dashboard = ({ darkMode = false }) => {
           </Card>
         </section>
 
-        {/* S&P Line Trend */}
-        <section className="panel-grid">
-          <Card className="chart-card" title="Underperformance Trend by Benchmark">
+        {/* S&P Line Trend + Fees card */}
+        <section className="panel-grid panel-grid--split">
+          <Card className="chart-card" title="Fund Managers Loss Rate Compared to the S&P 500">
             <div className="chart-container chart-container--tall">
               {spLoading && (
                 <div className="loading-container">
@@ -316,18 +331,36 @@ const Dashboard = ({ darkMode = false }) => {
                 <div className="error-text">Unable to load S&P comparison data.</div>
               )}
             </div>
+            <div className="chart-footnote">
+              Each line shows the share of active funds that failed to beat its respective benchmark.
+            </div>
           </Card>
+          <FeesCalloutCard />
         </section>
 
-        {/* S&P Comparison Table */}
+        {/* <div className="chart-footnote chart-footnote--inline">
+          <strong>Note:</strong> Each line shows the share of active funds that failed to beat <em>its respective benchmark</em>. The table below lists the benchmark used for each fund category.
+        </div> */}
+
+        {/* SPIVA Highlight Card */}
         <section className="table-section">
-          <DataTable
-            title="S&P 500 vs Large-Cap Benchmarks (Table View)"
-            data={spTableRows}
-            columns={spTableColumns}
-            downloadName="sp-comparison"
-          />
+          {spivaLoading ? (
+            <div className="loading-container">
+              <ProgressSpinner style={{ width: '40px', height: '40px' }} />
+            </div>
+          ) : (
+            <Card className="chart-card info-card" title="SPIVA Highlight">
+              <div className="spiva-highlight">
+                <div className="spiva-highlight__meta">As of: {spivaHighlight?.asOf || '—'}</div>
+                <div className="spiva-highlight__note">
+                  Source: <a href="https://www.spglobal.com/spdji/en/research-insights/spiva/" target="_blank" rel="noreferrer">SPIVA U.S. Scorecard</a>. Review the full report for details by category and horizon.
+                </div>
+
+              </div>
+            </Card>
+          )}
         </section>
+
 
         {/* SPIVA Table */}
         <section className="table-section">
@@ -337,13 +370,15 @@ const Dashboard = ({ darkMode = false }) => {
             </div>
           ) : (
             <DataTable
-              title="SPIVA Benchmark Underperformance (CSV)"
+              title="Benchmarks Used for Underperformance Calculations (SPIVA)"
               data={spivaData}
               columns={spivaColumns}
               downloadName="spiva-benchmark"
               paginator={false}
             />
+            
           )}
+
         </section>
       </div>
     </div>
