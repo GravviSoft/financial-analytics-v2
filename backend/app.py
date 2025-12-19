@@ -24,14 +24,8 @@ def load_chart_df():
     """Load chart data from CSV by default, optionally from Postgres when enabled."""
     if ENGINE:
         query = """
-            SELECT
-              "Comparison Index",
-              "1 YR (%)",
-              "3 YR (%)",
-              "5 YR (%)",
-              "10 YR (%)",
-              "15 YR (%)"
-            FROM sp500_benchmark_underperformance
+            SELECT *
+            FROM kaggle.spiva-underperformance-by-category
         """
         return pd.read_sql_query(query, ENGINE)
 
@@ -44,7 +38,7 @@ def load_spiva_df():
     if ENGINE:
         query = """
             SELECT *
-            FROM spiva_underperformance_by_category
+            FROM kaggle.spiva_underperformance_by_category
         """
         return pd.read_sql_query(query, ENGINE)
 
