@@ -25,7 +25,7 @@ def load_chart_df():
     if ENGINE:
         query = """
             SELECT *
-            FROM kaggle.spiva-underperformance-by-category
+            FROM kaggle.sp500_benchmark_underperformance
         """
         return pd.read_sql_query(query, ENGINE)
 
