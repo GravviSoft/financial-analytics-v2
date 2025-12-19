@@ -50,7 +50,7 @@ CONNECTION_STRING=postgresql://user:password@host:port/dbname  # used only when 
 - GET /api/spiva-table
 
 ## Production (Traefik)
-`docker-compose.yml` is set up for finance.gravvisoft.com with Traefik. If you’re not using Traefik, stick to the dev compose file.
+`docker-compose.yml` includes a Traefik setup pointed at your production host. Update the host/labels to your own domain, or use the dev compose file if you aren’t deploying behind Traefik.
 
 ## Tech stack & dependencies
 - Frontend: React, PrimeReact, Chart.js, React Router, axios
