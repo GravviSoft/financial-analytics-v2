@@ -343,7 +343,7 @@ const Dashboard = ({ darkMode = false }) => {
             </div>
           ) : (
             <DataTable
-              title="Benchmarks Used for Underperformance Calculations (SPIVA)"
+              title="SPIVA Underperformance by Benchmark (Percent of Funds Below Index)"
               data={spivaData}
               columns={spivaColumns}
               downloadName="spiva-benchmark"
