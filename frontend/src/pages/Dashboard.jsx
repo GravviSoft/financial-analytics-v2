@@ -30,8 +30,6 @@ const Dashboard = ({ darkMode = false }) => {
     Tooltip,
     Legend
   );
-  const [loading, setLoading] = useState(true);
-  const [dashboardData, setDashboardData] = useState(null);
   const [spData, setSpData] = useState(null);
   const [spYear, setSpYear] = useState('1 YR');
   const [spLoading, setSpLoading] = useState(true);
@@ -39,22 +37,9 @@ const Dashboard = ({ darkMode = false }) => {
   const [spivaLoading, setSpivaLoading] = useState(true);
 
   useEffect(() => {
-    loadDashboardData();
     loadSpComparison();
     loadSpivaTable();
   }, []);
-
-  const loadDashboardData = async () => {
-    setLoading(true);
-    try {
-      const data = await dataService.getDashboardData();
-      setDashboardData(data);
-    } catch (error) {
-      console.error('Error loading dashboard data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const loadSpComparison = async () => {
     setSpLoading(true);
@@ -199,18 +184,6 @@ const Dashboard = ({ darkMode = false }) => {
       fundCategory: target?.fundCategory || 'All Large-Cap',
     };
   }, [spivaData]);
-
-  if (loading) {
-    return (
-      <div className="loading-container">
-        <ProgressSpinner />
-      </div>
-    );
-  }
-
-  if (!dashboardData) {
-    return <div>Error loading dashboard data</div>;
-  }
 
   return (
     <div className={`dashboard ${darkMode ? 'dashboard--dark' : ''}`}>
