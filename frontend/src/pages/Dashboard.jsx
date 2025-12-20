@@ -334,7 +334,7 @@ const Dashboard = ({ darkMode = false }) => {
                   >
                     SPIVA® U.S. Scorecard
                   </a>
-                  ;{" "}
+                   {" "} and {" "} 
                   <a
                     href="https://www.morningstar.com/business/insights/research/active-passive-barometer?utm_source=chatgpt.com"
                     target="_blank"
