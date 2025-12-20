@@ -175,13 +175,13 @@ const Dashboard = ({ darkMode = false }) => {
   const spivaHighlight = useMemo(() => {
     if (!spivaData || !spivaData.length) return null;
     const target =
-      spivaData.find((row) => row.fundCategory?.toLowerCase().includes('all large-cap')) || spivaData[0];
+      spivaData.find((row) => row.fundCategory?.toLowerCase().includes('all managed funds')) || spivaData[0];
     const fiveYr = Number.parseFloat(target?.yr5);
     return {
       asOf: 'Jun 30, 2025',
       fiveYr: Number.isFinite(fiveYr) ? fiveYr : null,
       comparisonIndex: target?.comparisonIndex || 'S&P 500®',
-      fundCategory: target?.fundCategory || 'All Large-Cap',
+      fundCategory: target?.fundCategory || 'Managed Funds',
     };
   }, [spivaData]);
 
@@ -322,13 +322,28 @@ const Dashboard = ({ darkMode = false }) => {
               <ProgressSpinner style={{ width: '40px', height: '40px' }} />
             </div>
           ) : (
-            <Card className="chart-card info-card" title="SPIVA Highlight">
+            <Card className="chart-card info-card" title="Sources">
               <div className="spiva-highlight">
-                <div className="spiva-highlight__meta">As of: {spivaHighlight?.asOf || '—'}</div>
+                <div className="spiva-highlight__meta">As of: June 30, 2025</div>
                 <div className="spiva-highlight__note">
-                  Source: <a href="https://www.spglobal.com/spdji/en/research-insights/spiva/" target="_blank" rel="noreferrer">SPIVA U.S. Scorecard</a>. Review the full report for details by category and horizon.
+                  Primary sources:{" "}
+                  <a
+                    href="https://www.spglobal.com/spdji/en/research-insights/spiva/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    SPIVA® U.S. Scorecard
+                  </a>
+                  ;{" "}
+                  <a
+                    href="https://www.morningstar.com/business/insights/research/active-passive-barometer?utm_source=chatgpt.com"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Morningstar Active/Passive Barometer
+                  </a>
+                  .  Additional context: public research summaries from fund providers and academic literature.
                 </div>
-
               </div>
             </Card>
           )}

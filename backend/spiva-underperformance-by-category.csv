@@ -1,17 +1,17 @@
 Asset Class,Fund Category,Comparison Index,1 YR (%),3 YR (%),5 YR (%),10 YR (%),15 YR (%)
-U.S. Equity,All Large-Cap,S&P 500®,72.61,64.87,86.91,85.98,88.29
-U.S. Equity,All Domestic,S&P Composite 1500®,74.87,79.32,88.32,90.31,92.52
-U.S. Equity,All Multi-Cap,S&P Composite 1500®,69.40,78.38,85.94,89.11,90.85
-U.S. Equity,All Small-Cap,S&P SmallCap 600®,40.58,30.21,61.60,78.42,85.41
-U.S. Equity,All Mid-Cap,S&P MidCap 400®,37.25,66.67,73.54,76.84,83.72
-U.S. Equity,Large-Cap Value,S&P 500 Value,21.97,78.23,76.14,89.40,91.96
-U.S. Equity,Global Funds,S&P World (USD),75.31,80.33,89.52,91.70,92.86
-U.S. Equity,Large-Cap Growth,S&P 500 Growth,86.82,42.45,88.29,90.51,96.29
-U.S. Equity,Large-Cap Core,S&P 500®,85.32,79.74,83.11,96.57,96.77
-U.S. Equity,Emerging Markets Funds,S&P/IFCI Composite,63.98,63.59,78.11,85.89,87.23
-U.S. Equity,International Funds,S&P World Ex-U.S. Index (USD),57.22,75.19,79.35,90.52,90.42
-U.S. Fixed Income,High Yield,iBoxx $ Liquid High Yield,94.64,87.21,64.67,84.89,82.14
-U.S. Fixed Income,Investment-Grade Short & Intermediate,iBoxx $ Overall 1-5Y,58.43,24.69,26.92,50.65,70.37
-U.S. Fixed Income,General Municipal Debt,S&P National AMT-Free Municipal Bond,64.37,50.00,54.22,75.00,59.30
-U.S. Fixed Income,General Investment-Grade,iBoxx $ Liquid Investment Grade,78.48,70.24,50.57,85.11,89.06
-U.S. Fixed Income,General Government,iBoxx $ Domestic Sovereign & Sub-Sovereigns,80.56,97.06,91.18,100.00,85.54
+U.S. Equity,All Large-Cap,S&P 500®,64.49,78.98,82.14,85.14,91.62
+U.S. Equity,All Domestic,S&P Composite 1500®,68.83,81.49,88.13,84.49,88.97
+U.S. Equity,All Multi-Cap,S&P Composite 1500®,66.79,82.44,88.58,86.36,90.7
+U.S. Equity,All Small-Cap,S&P SmallCap 600®,68.45,84.35,89.4,85.67,96.73
+U.S. Equity,All Mid-Cap,S&P MidCap 400®,45.64,74.29,79.88,88.03,92.71
+U.S. Equity,Large-Cap Value,S&P 500 Value,46.27,70.91,79.08,81.71,79.33
+U.S. Equity,Global Funds,S&P World (USD),70.61,84.26,84.92,81.2,83.16
+U.S. Equity,Large-Cap Growth,S&P 500 Growth,60.27,76,87.5,84.08,94.59
+U.S. Equity,Large-Cap Core,S&P 500®,75.85,87.21,92.35,93.27,92.09
+U.S. Equity,Emerging Markets Funds,S&P/IFCI Composite,78.1,89.27,92.67,87.72,96.15
+U.S. Equity,International Funds,S&P World Ex-U.S. Index (USD),76.84,89.19,81.78,81.07,89.83
+U.S. Fixed Income,High Yield,iBoxx $ Liquid High Yield,75.6,96.63,96.52,96.63,99.15
+U.S. Fixed Income,Investment-Grade Short & Intermediate,iBoxx $ Overall 1-5Y,91.69,42.73,53.24,46.57,73.42
+U.S. Fixed Income,General Municipal Debt,S&P National AMT-Free Municipal Bond,85.33,67.07,46.25,44.59,84.11
+U.S. Fixed Income,General Investment-Grade,iBoxx $ Liquid Investment Grade,74.82,51.79,61.73,54.44,79.7
+U.S. Fixed Income,General Government,iBoxx $ Domestic Sovereign & Sub-Sovereigns,80.56,97.06,91.18,100,85.54
