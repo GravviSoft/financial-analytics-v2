@@ -4,7 +4,11 @@ A focused dashboard that answers one question: **How often do active funds fail 
 
 It pairs a React + PrimeReact frontend with a Flask API that serves SPIVA-style data from either bundled CSVs or Postgres (toggleable)
 
-![Analytics dashboard demo](docs/media/finance_gravvisoft_demo3_12s.gif)
+<div align="center">
+  <img src="docs/media/finance_gravvisoft_demo3_12s.gif" alt="Analytics dashboard demo" width="100%" style="max-width: 1400px;">
+</div>
+
+
 
 ## What this shows
 - **Bar chart** with year toggles: share of active funds that underperform benchmarks.
